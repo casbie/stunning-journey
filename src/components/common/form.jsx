@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Joi from "joi-browser";
 import Input from "./input";
+import Select from "./select";
 
 class Form extends Component {
   state = {
@@ -54,7 +55,7 @@ class Form extends Component {
     // call the server
     // const username = document.getElementById("username").value;
     // const username = this.username.current.value; // if you really need to access dom
-    this.doSummit();
+    this.doSubmit();
   };
 
   handleChange = ({ currentTarget: input }) => {
@@ -84,6 +85,20 @@ class Form extends Component {
         name={name}
         value={data[name]}
         label={label}
+        onChange={this.handleChange}
+        error={errors[name]}
+      />
+    );
+  }
+
+  renderDropdown(name, label, options) {
+    const { data, errors } = this.state;
+    return (
+      <Select
+        name={name}
+        value={data[name]}
+        label={label}
+        options={options}
         onChange={this.handleChange}
         error={errors[name]}
       />
